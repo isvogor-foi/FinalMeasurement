@@ -1,6 +1,8 @@
 package hr.foi.thor.main.scenario1;
 
 import hr.foi.thor.InitializerS1;
+import hr.foi.thor.main.scenario1.fpga.FpgaCom;
+import hr.foi.tiwo.OdInitializerS1;
 
 public class FilteringInitializer {
 
@@ -8,7 +10,7 @@ public class FilteringInitializer {
 		
 		// TODO: set image sizes..
 		// S-VGA
-		InitializerS1 i = new InitializerS1(0);
+		InitializerS1 i = new InitializerS1(0); // RUN ON CPU!
 		i.runSVga(i.createBufferedImage("/home/ivan/Dev/java/temp/cap2g.jpg"));
 		
 		// SGE-VGA
@@ -20,6 +22,17 @@ public class FilteringInitializer {
 
 		// SGEDH-SXGA
 		i.runSgedhSxga(i.createBufferedImage("/home/ivan/Dev/java/temp/cap2g.jpg"));
+		
+		// GPU
+		
+		OdInitializerS1 odi = new OdInitializerS1();
+		odi.detectOnCPU();
+		
+		odi.detectOnCPU();
+		
+		// FPGA
+		FpgaCom fpga = new FpgaCom();
+		fpga.call();
 
 	}
 	
