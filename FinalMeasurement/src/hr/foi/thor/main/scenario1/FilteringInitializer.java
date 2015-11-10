@@ -30,9 +30,13 @@ public class FilteringInitializer {
 		
 		odi.detectOnCPU();
 		
+		// SGEDH-SXGA
+		i.initialize();
+		i.runSgedFhd(i.createBufferedImage("/home/ivan/Dev/java/temp/cap2g.jpg"));
+		
 		// FPGA
-		FpgaCom fpga = new FpgaCom();
-		fpga.call();
+		//FpgaCom fpga = new FpgaCom();
+		//fpga.call();
 
 	}
 	
