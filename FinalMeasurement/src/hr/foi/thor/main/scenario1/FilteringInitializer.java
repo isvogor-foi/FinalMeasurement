@@ -6,33 +6,33 @@ import hr.foi.tiwo.OdInitializerS1;
 
 public class FilteringInitializer {
 
-	public static void run(){
+	public void run(){
 		
         System.out.println(" --- FM-S ---");
         //
         // --------------------------- CPU -------------------------------------------------------------
         //
 		// S-VGA
-		InitializerS1 i = new InitializerS1(0); // RUN ON CPU!
+		InitializerS1 i = new InitializerS1(1); // RUN ON CPU!
 		long f1s = System.nanoTime();
-			i.runSVga(i.createBufferedImage("/home/ivan/dev/imgs/testimages/640.jpg"));
+			i.runS(i.createBufferedImage("/home/ivan/dev/imgs/testimages/640.jpg"));
 		long f1e = System.nanoTime();
 		
 		// SGE-VGA
 		long f2s = System.nanoTime();
-			i.runSgeVga(i.createBufferedImage("/home/ivan/dev/imgs/testimages/640.jpg"));
+			i.runSge(i.createBufferedImage("/home/ivan/dev/imgs/testimages/640.jpg"));
 		long f2e = System.nanoTime();
 		
 		// SGE-SXGA
 		i.initialize();
 		
 		long f3s = System.nanoTime();
-			i.runSgeSxga(i.createBufferedImage("/home/ivan/dev/imgs/testimages/1280.jpg"));
+			i.runSge(i.createBufferedImage("/home/ivan/dev/imgs/testimages/1280.jpg"));
 		long f3e = System.nanoTime();
 		
 		// SGEDH-SXGA
 		long f4s = System.nanoTime();
-			i.runSgedhSxga(i.createBufferedImage("/home/ivan/dev/imgs/testimages/1280.jpg"));
+			i.runSgedh(i.createBufferedImage("/home/ivan/dev/imgs/testimages/1280.jpg"));
 		long f4e = System.nanoTime();
 		
         //
@@ -43,20 +43,22 @@ public class FilteringInitializer {
 		long d1s = System.nanoTime();
 			odi.detectOnCPU("/home/ivan/dev/imgs/testimages/640.jpg");
 		long d1e = System.nanoTime();
+		odi = null;
 		
+		odi = new OdInitializerS1();
 		long d2s = System.nanoTime();
 			odi.detectOnCPU("/home/ivan/dev/imgs/testimages/1920.jpg");
 		long d2e = System.nanoTime();
 		
-		i = new InitializerS1(1); // RUN ON GPU!
+		i = new InitializerS1(0); // RUN ON GPU!
 		// SGEDH-SXGA
 		i.initialize();
 		long f5s = System.nanoTime();
-			i.runSgedFhd(i.createBufferedImage("/home/ivan/dev/imgs/testimages/640.jpg"));
+			i.runSged(i.createBufferedImage("/home/ivan/dev/imgs/testimages/1920.jpg"));
 		long f5e = System.nanoTime();
 		
 		long f6s = System.nanoTime();
-			i.runSgedFhd(i.createBufferedImage("/home/ivan/dev/imgs/testimages/1920.jpg"));
+			i.runSgedh(i.createBufferedImage("/home/ivan/dev/imgs/testimages/1920.jpg"));
 		long f6e = System.nanoTime();
 
         //
@@ -91,7 +93,7 @@ public class FilteringInitializer {
 	        
 	        System.out.println("FPGA-S: " + (float) ((fp1e-fp1s)/1e6));
 	        System.out.println("FPGA-G: " + (float) ((fp2e-fp2s)/1e6));
-	        System.out.println("SPGA-SG: " + (float) ((fp3e-fp3s)/1e6));
+	        System.out.println("FPGA-SG: " + (float) ((fp3e-fp3s)/1e6));
         System.out.println(" --- FM-D-E ---");
         
         System.out.println(" --- FM-E ---");
