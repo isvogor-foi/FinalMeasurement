@@ -12,7 +12,7 @@ import com.tiwo.communication.sockets.RpiExchangePackage;
 
 public class FpgaCom {
 	
-	public void call(){
+	public void call(String file, String filter){
 		ClientSocket client = ClientSocket.getInstance();
 		client.startRemote();
 		
@@ -24,7 +24,7 @@ public class FpgaCom {
 		try {
 			///home/ivan/Dev/C/workspace/cimgs/beagle_qvga.jpg
 			//openFileLocation
-			rawImage = ImageIO.read(new File("/home/ivan/Dev/C/workspace/cimgs/beagle_qvga.jpg"));
+			rawImage = ImageIO.read(new File(file));
 			
 			ImageIO.write(rawImage, "jpg", baos);
 			baos.flush();
@@ -35,14 +35,15 @@ public class FpgaCom {
 		}
 		
 		RpiExchangePackage packet = new RpiExchangePackage();
-		packet.setFpgaCommand("sobel gauss erode dilate");
+		packet.setFpgaCommand(filter);
+		//packet.setFpgaCommand("sobel gauss erode dilate");
 		//packet.setFpgaCommand("gauss sobel erode hyst");
 		packet.img = bytes;
 		packet.setMessage("Message size (" + bytes.length + ")");
 		//client.sendPackageToServer(packet);
 
 		
-		for( int i = 0; i <= 550; i++){
+		for( int i = 0; i < 1; i++){
 			//Measurement.startMeasuring();
 			System.out.println("At: " + i);
 			client.sendPackageToServer(packet);
