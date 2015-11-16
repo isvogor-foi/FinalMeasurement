@@ -1,10 +1,10 @@
 package hr.foi.thor.main.scenario1;
 
-import hr.foi.thor.InitializerS1;
+import hr.foi.thor.Initializer;
 import hr.foi.thor.main.scenario1.fpga.FpgaCom;
-import hr.foi.tiwo.OdInitializerS1;
+import hr.foi.tiwo.OdInitializerGpu;
 
-public class FilteringInitializerSc2 {
+public class ManualScenario2 {
 
 	public void run(){
 		
@@ -13,7 +13,7 @@ public class FilteringInitializerSc2 {
         // --------------------------- CPU -------------------------------------------------------------
         //
 		// S-VGA
-		InitializerS1 i = new InitializerS1(1); // RUN ON CPU!
+		Initializer i = new Initializer(1); // RUN ON CPU!
 		long f1s = System.nanoTime();
 			i.runSg(i.createBufferedImage("/home/ivan/dev/imgs/testimages/1280.jpg"));
 		long f1e = System.nanoTime();
@@ -27,7 +27,7 @@ public class FilteringInitializerSc2 {
         // --------------------------- GPU -------------------------------------------------------------
         //
 		
-		i = new InitializerS1(0); // RUN ON GPU!
+		i = new Initializer(0); // RUN ON GPU!
 		// SGEDH-SXGA
 		i.initialize();
 		long f3s = System.nanoTime();
@@ -52,10 +52,10 @@ public class FilteringInitializerSc2 {
 			i.runSgedh(i.createBufferedImage("/home/ivan/dev/imgs/testimages/1920.jpg"));
 		long f7e = System.nanoTime();	
 		
-		OdInitializerS1 odi = new OdInitializerS1();
+		OdInitializerGpu odi = new OdInitializerGpu();
 		
 		long d1s = System.nanoTime();
-			odi.detectOnCPU("/home/ivan/dev/imgs/testimages/1920.jpg");
+			odi.detect("/home/ivan/dev/imgs/testimages/1920.jpg");
 		long d1e = System.nanoTime();
 		
 
@@ -79,18 +79,22 @@ public class FilteringInitializerSc2 {
 		long fp3e = System.nanoTime();
         
         System.out.println(" --- FM-D-S ---");
-	        System.out.println("CPU-S-VGA: " + (float) ((f1e-f1s)/1e6));
+        
+	        System.out.println("CPU-SG-VGA: " + (float) ((f1e-f1s)/1e6));
 	        System.out.println("CPU-SGE-VGA: " + (float) ((f2e-f2s)/1e6));
 	        
 	        System.out.println("GPU-S-FHD: " + (float) ((f3e-f3s)/1e6));
-	        System.out.println("GPU-F-FHD: " + (float) ((f4e-f4s)/1e6));
+	        System.out.println("GPU-G-FHD: " + (float) ((f4e-f4s)/1e6));
 	        System.out.println("GPU-SG-FHD: " + (float) ((f5e-f5s)/1e6));
 	        System.out.println("GPU-SGE-FHD: " + (float) ((f6e-f6s)/1e6));
 	        System.out.println("GPU-SGEDH-FHD: " + (float) ((f7e-f7s)/1e6));
+	       
+	        System.out.println("GPU-OD-FHD: " + (float) ((d1s-d1e)/1e6));
 	        
 	        System.out.println("FPGA-S: " + (float) ((fp1e-fp1s)/1e6));
 	        System.out.println("FPGA-SGE: " + (float) ((fp2e-fp2s)/1e6));
 	        System.out.println("FPGA-SGEDH: " + (float) ((fp3e-fp3s)/1e6));
+	        
         System.out.println(" --- FM-D-E ---");
         
         System.out.println(" --- FM-E ---");

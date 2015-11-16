@@ -1,10 +1,10 @@
 package hr.foi.thor.main.scenario1;
 
-import hr.foi.thor.InitializerS1;
+import hr.foi.thor.Initializer;
 import hr.foi.thor.main.scenario1.fpga.FpgaCom;
-import hr.foi.tiwo.OdInitializerS1;
+import hr.foi.tiwo.OdInitializerGpu;
 
-public class FilteringInitializer {
+public class ManualScenario1 {
 
 	public void run(){
 		
@@ -13,7 +13,7 @@ public class FilteringInitializer {
         // --------------------------- CPU -------------------------------------------------------------
         //
 		// S-VGA
-		InitializerS1 i = new InitializerS1(1); // RUN ON CPU!
+		Initializer i = new Initializer(1); // RUN ON CPU!
 		long f1s = System.nanoTime();
 			i.runS(i.createBufferedImage("/home/ivan/dev/imgs/testimages/640.jpg"));
 		long f1e = System.nanoTime();
@@ -38,19 +38,19 @@ public class FilteringInitializer {
         //
         // --------------------------- GPU -------------------------------------------------------------
         //
-		OdInitializerS1 odi = new OdInitializerS1();
+		OdInitializerGpu odi = new OdInitializerGpu();
 		
 		long d1s = System.nanoTime();
-			odi.detectOnCPU("/home/ivan/dev/imgs/testimages/640.jpg");
+			odi.detect("/home/ivan/dev/imgs/testimages/640.jpg");
 		long d1e = System.nanoTime();
 		odi = null;
 		
-		odi = new OdInitializerS1();
+		odi = new OdInitializerGpu();
 		long d2s = System.nanoTime();
-			odi.detectOnCPU("/home/ivan/dev/imgs/testimages/1920.jpg");
+			odi.detect("/home/ivan/dev/imgs/testimages/1920.jpg");
 		long d2e = System.nanoTime();
 		
-		i = new InitializerS1(0); // RUN ON GPU!
+		i = new Initializer(0); // RUN ON GPU!
 		// SGEDH-SXGA
 		i.initialize();
 		long f5s = System.nanoTime();
