@@ -89,7 +89,7 @@ public class ManualScenario2 {
 	        System.out.println("GPU-SGE-FHD: " + (float) ((f6e-f6s)/1e6));
 	        System.out.println("GPU-SGEDH-FHD: " + (float) ((f7e-f7s)/1e6));
 	       
-	        System.out.println("GPU-OD-FHD: " + (float) ((d1s-d1e)/1e6));
+	        System.out.println("GPU-OD-FHD: " + (float) ((d1e-d1s)/1e6));
 	        
 	        System.out.println("FPGA-S: " + (float) ((fp1e-fp1s)/1e6));
 	        System.out.println("FPGA-SGE: " + (float) ((fp2e-fp2s)/1e6));
