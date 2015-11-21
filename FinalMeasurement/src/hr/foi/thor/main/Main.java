@@ -2,8 +2,10 @@ package hr.foi.thor.main;
 
 import hr.foi.thor.main.scenario1.CalculatedScenario1;
 import hr.foi.thor.main.scenario1.CalculatedScenario1T2;
+import hr.foi.thor.main.scenario1.CalculatedScenario1T3;
 import hr.foi.thor.main.scenario1.CalculatedScenario2;
 import hr.foi.thor.main.scenario1.CalculatedScenario2T2;
+import hr.foi.thor.main.scenario1.CalculatedScenario2T3;
 import hr.foi.thor.main.scenario1.ManualScenario1;
 import hr.foi.thor.main.scenario1.ManualScenario2;
 
@@ -18,7 +20,9 @@ public class Main {
 		//CalculatedScenario1 fi = new CalculatedScenario1();
 		//CalculatedScenario2 fi = new CalculatedScenario2();
 		//CalculatedScenario2T2 fi = new CalculatedScenario2T2();
-		CalculatedScenario1T2 fi = new CalculatedScenario1T2();
+		//CalculatedScenario1T2 fi = new CalculatedScenario1T2();
+		//CalculatedScenario1T3 fi = new CalculatedScenario1T3();
+		CalculatedScenario2T3 fi = new CalculatedScenario2T3();
 		
 		try {
 			System.out.println("Waiting...");
